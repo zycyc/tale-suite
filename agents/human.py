@@ -19,7 +19,6 @@ except ImportError:
 
 
 class HumanAgent(tales.Agent):
-
     def __init__(self, *args, **kwargs):
         self.token_counter = get_token_counter()
         self.history = []
@@ -73,6 +72,8 @@ class HumanAgent(tales.Agent):
             "prompt": format_messages_to_markdown(messages),
             "response": response,
             "nb_tokens": self.token_counter(messages=messages, text=response),
+            "nb_tokens_prompt": self.token_counter(messages=messages),
+            "nb_tokens_response": self.token_counter(text=response),
         }
 
         return action, stats

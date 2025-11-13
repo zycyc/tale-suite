@@ -133,10 +133,14 @@ class ReactAgent(tales.Agent):
 
         # Compute usage statistics
         nb_tokens_act = self.token_counter(messages=messages, text=response.text())
+        nb_tokens_act_prompt = self.token_counter(messages=messages)
+        nb_tokens_act_response = self.token_counter(text=response.text())
         stats = {
             "prompt": format_messages_to_markdown(messages),
             "response": response.text(),
             "nb_tokens": nb_tokens_cot + nb_tokens_act,
+            "nb_tokens_prompt": nb_tokens_act_prompt,
+            "nb_tokens_response": nb_tokens_act_response,
         }
 
         return action, stats
